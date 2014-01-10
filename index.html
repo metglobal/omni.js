@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="resources/VisitorAPI.js"></script>
+  <script src="resources/AppMeasurement.js"></script>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="omni.js"></script>
+</head>
+<body>
+<script language="JavaScript" type="text/javascript"><!--
+  var s = omni("namespace")
+    .set("pageName",              "ProjectName")
+
+    .set("trackExternalLinks",    true)
+    .set("trackInlineStats",      true)
+    .set("linkInternalFilters",   "javascript:,example.com")
+    .set("linkLeaveQueryString",  false)
+    
+    .route(/name=(.*)$/, function (name) {
+      this.set("pageName", "Hello World");
+      this.evar(12, name);
+    })
+    .route(/index.html\?404/, omni.errorPage(404))
+    .route(/index.html\?500/, omni.errorPage(500))
+    .route(/index.html$/, function () {
+      this.evar(1, "index.html found")
+          .set("pageName", "index file")
+
+      this.event.purchase({
+        id: "1234567890",
+        products: [
+          {category: "Running", product: "Shoe", quantity: 1, price: 69.95},
+          {category: "Running", product: "Shoes", quantity: 1, price: 29.95}
+        ]
+      });
+
+      this.event.products([
+        {category: "Running", product: "Shoe", events: {1: "1.99"}},
+        {category: "Running", product: "Socks", events: {1: "2.99"}},
+        {product: "Boats"}
+      ]);
+
+      this.event.product(
+        {category: "Running"}
+      );
+
+    })
+    .run();
+</script>
+<a data-track="Hello Link" data-track-action="Interacting Hello" data-track-evar="11" data-track-on="click, mouseover">Hello Link</a>
+</body>
+</html>
