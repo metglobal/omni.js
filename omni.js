@@ -113,7 +113,7 @@ var omni = (function () {
             self.set("linkTrackVars", "eVar" + evar);
             self.evar(evar, [self.get("pageName"), $el.data("track")].join(" : "));
           }
-          self.instance.tl($el.get(0), $el.data("track-link").substr(0, 1) || "o", $el.data("track-action"));
+          self.instance.tl($el.get(0), ($el.data("track-link") || "o").substr(0, 1), $el.data("track-action"));
         });
       });
     });
