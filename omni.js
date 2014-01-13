@@ -78,7 +78,11 @@ var omni = (function () {
           break;
       }
     }
-    this.instance.t();
+    this.push();
+  };
+
+  Omniture.prototype.push = function () {
+    return this.instance.t();
   };
 
   Omniture.prototype.track = function (selector, event, evar, title, action, callback) {
