@@ -1,4 +1,4 @@
-# Adobe Omniture Analytics Client
+# omni.js v0.0.5: Adobe Omniture Analytics Client
 
 Adobe Omniture Client is a client for websites which uses Adobe Analytics.
 
