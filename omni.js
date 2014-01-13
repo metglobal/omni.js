@@ -131,23 +131,64 @@ var omni = (function () {
     }
   };
 
-  Omniture.prototype.productsEvent = function (products) {
-    this.setOption("events", "prodView");
-    var productList = [];
-    for (var i = 0; i < products.length; i++) {
-      var product = products[i];
-      if (!product.category) { product.category = ""; }
-      productList.push([product.category, product.product].join(";"));
+  Omniture.prototype.serialize = function (mainEvent, items, map) {
+    var list = [];
+    var events = [mainEvent];
+    var map = (map || "").split(",");
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      var itemData = [];
+      for (var j = 0; j < map.length; j++) {
+        var value = item[map[j]] || "";
+        itemData.push(value);
+      }
+      if (item.events) {
+        var eventData = [];
+        for (var event in item.events) {
+          if (item.events.hasOwnProperty(event)) {
+            var eventValue = item.events[event];
+            if (events.indexOf(event) == -1) {
+              events.push("event" + event);
+            }
+            eventData.push(["event" + event, eventValue].join("="));
+          }
+        }
+        itemData.push(eventData);
+      }
+      list.push(itemData.join(";"));
     }
-    productSerialized = productList.join(","); 
-    this.setOption("products", productSerialized);
+    return {
+      events: events.join(","),
+      list: list.join(",")
+    };
+  };
+
+  Omniture.prototype.productsEvent = function (products) {
+    var serialized = this.serialize("prodView", products,
+      "category,product"
+    ); 
+    this.setOption("events", serialized.events);
+    this.setOption("products", serialized.list);
+  };
+
+  Omniture.prototype.purchaseEvent = function (purchaseId, products) {
+    if (typeof purchaseId == "object") {
+      products = purchaseId;
+    } else if (purchaseId) {
+      this.setOption("purchaseID", purchaseId);
+    }
+    var serialized = this.serialize("purchase", products,
+      "category,product,quantity,price"
+    );
+    this.setOption("events", serialized.events);
+    this.setOption("products", serialized.list);
   };
 
   Omniture.prototype.productEvent = function (product) {
     this.productsEvent([product]);
   };
 
-  Omniture.prototype.emit = function (event/*, arguments... */) {
+  Omniture.prototype.preset = function (event/*, arguments... */) {
     var method = this[event + "Event"];
     if (typeof method == "function") {
       method.apply(this, Array.prototype.slice.call(arguments, 1));
