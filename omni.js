@@ -154,7 +154,7 @@ var omni = (function () {
             eventData.push([eventKey, eventValue].join("="));
           }
         }
-        itemData.push(eventData);
+        itemData.push(eventData.join("|"));
       }
       list.push(itemData.join(";"));
     }
