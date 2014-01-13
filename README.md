@@ -26,7 +26,7 @@ omni("namespace")
     this.set("purchaseID", purchaseId);
 
     // Use Preset Events for eCommerce
-    this.preset("products", [
+    this.preset("purchase", /*optional purchaseId:*/"123456789", [
       {category: "Running", product: "Shoe", quantity: 1, price: 69.95},
       {category: "Running", product: "Socks", quantity: 1, price: 29.95, events: {1: "34.99"}},
       {product: "Boats", quantity: 2}
