@@ -45,6 +45,140 @@ omni("namespace")
   .run();
 ```
 
+## API
+
+### `omni(namespace)`
+
+Omni is the main function that returns the instance of the Omniture tracker object.
+
+```javascript
+var s = omni("namespace");
+```
+It sets `s_account` variable of Omniture.
+
+It also creates `Visitor` object with additional `"Visitor"` suffix. Then your Visitor namespace will be `"namespaceVisitor"`
+
+### `setOption(key, value)` or `set`
+
+It sets the option and the value of a Omniture variable.
+
+```javascript
+s.set("pageName", "My Project");
+```
+
+### `getOption(key)` or `get`
+
+It gets a defined Omniture variable.
+
+```javascript
+console.log(s.get("pageName")); //=> "My Project"
+```
+
+### `setVisitorOption(key, value)`
+
+Sets a value for `Visitor` instance that created at the construction.
+
+### `setSeqParam(key, sequence, value)`
+
+Sets a sequenced parameter. Used for `eVar`, `prop` or `hier`
+
+```javascript
+s.setSeqParam("eVar", 1, "hello");
+console.log(s.get("eVar1")); //=> "hello"
+```
+
+### `setEVar(id, value)` or `evar`
+
+Shortcut for `eVar` setting. Simply makes a `setSeqParam` with currying.
+
+```javascript
+s.setEVar(1, "hello"); // same with `s.evar(1, "hello")`
+console.log(s.get("eVar1")); //=> "hello"
+```
+
+You can also use same pattern with `setHier` (alias: `hier()`) and `setProp` (alias: `prop()`):
+
+### `route(route, callback)`
+
+It registers a route to router stack to match and run by `run` method.
+
+```javascript
+s.route("index.html", function () {
+  this.set("pageName", "Index Page");    
+});
+
+s.route("about.html", function () {
+  this.set("pageName", "About Page");    
+});
+
+s.run(); //=> This is required to find routes.
+```
+
+### `run()`
+
+It searches for the current location and runs the matching function. So you can define analytics for each page in one JavaScript file.
+
+### `preset(name, args...)`
+
+This uses Adobe Omniture's preset events. These are generally about content for an ecommerce site.
+
+Built in Presets:
+  - purchase
+  - product
+  - products
+
+```javascript
+s.preset("purchase", [
+  {category: "Running", product: "Shoe", "price": 10.99}    
+]);
+```
+
+### Chaining
+
+You can chain every method after creating the omniture object.
+
+```javascript
+var s = omni("hello").set("pageName", "hello").push();
+```
+
+### Sending Async Tracking Data
+
+You can also send async data to Omniture. To do that, use `push` method.
+It can be used after ajax calls or something.
+
+```javascript
+s.evar(1, "hello").push();
+```
+
+## Advanced API
+
+These are for contribution or advanced customizing.
+
+### Define Presets
+
+You can define custom presets. Just add a method with a `Event` suffix.
+
+```javascript
+Omniture.prototype.customeventEvent = function (data) {
+  console.log(data);
+};
+
+s.preset("customevent", data);
+```
+
+### Serialize Objects for Omniture
+
+Omniture uses a special serialization method. You can serialize your datausing `serialize` function.
+
+```javascript
+var ser = s.serialize("custom", [
+    {a: 1, b: 2, events: {1: "hello"}},
+    {a: 3, b: 4}],
+"a,b");
+console.log(ser.events); //=> "custom,event1"
+console.log(ser.list); //=> "1;2;event1=hello,3;4"
+```
+
 ### Resources
 [https://microsite.omniture.com/t2/help/en_US/sc/implement/index.html](https://microsite.omniture.com/t2/help/en_US/sc/implement/index.html)
 
