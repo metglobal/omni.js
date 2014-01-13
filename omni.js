@@ -147,10 +147,11 @@ var omni = (function () {
         for (var event in item.events) {
           if (item.events.hasOwnProperty(event)) {
             var eventValue = item.events[event];
-            if (events.indexOf(event) == -1) {
-              events.push("event" + event);
+            var eventKey = "event" + event;
+            if (events.indexOf(eventKey) == -1) {
+              events.push(eventKey);
             }
-            eventData.push(["event" + event, eventValue].join("="));
+            eventData.push([eventKey, eventValue].join("="));
           }
         }
         itemData.push(eventData);
