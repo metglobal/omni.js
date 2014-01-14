@@ -1,0 +1,32 @@
+{
+  "name": "omnijs",
+  "version": "0.0.5",
+  "description": "Adobe Omniture Client is a client for websites which uses Adobe Analytics.",
+  "main": "omni.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-qunit": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/metglobal/omni.js.git"
+  },
+  "keywords": [
+    "omniture",
+    "adobe"
+  ],
+  "author": "fatih.akin@metglobal.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/metglobal/omni.js/issues"
+  }
+}

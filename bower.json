@@ -1,0 +1,22 @@
+{
+  "name": "omni.js",
+  "version": "0.0.5",
+  "homepage": "https://github.com/metglobal/omni.js",
+  "authors": [
+    "Fatih Kadir Akın <fatih.akin@metglobal.com>"
+  ],
+  "description": "Adobe Omniture Client",
+  "main": "omni-min.js",
+  "keywords": [
+    "omniture",
+    "adobe"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
