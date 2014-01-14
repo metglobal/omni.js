@@ -79,6 +79,7 @@ var omni = (function () {
       }
     }
     this.push();
+    return this;
   };
 
   Omniture.prototype.push = function () {
