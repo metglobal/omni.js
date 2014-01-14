@@ -2,6 +2,14 @@
 
 Adobe Omniture Client is a client for websites which uses Adobe Analytics.
 
+## Installation
+
+You can install Omni.js with Bower.
+
+```bash
+bower install omnijs
+```
+
 ## Overview
 
 It has a clean interface than Adobe's official client.
