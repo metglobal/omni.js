@@ -19,8 +19,8 @@ test("Test Construction", function() {
   
   var omniTest = omni("hello");
 
-  ok(omniTest.instance.visitorNamespace == "helloVisitor",
-    "visitorNamespace of hello is helloVisitor");
+  ok(omniTest.instance.visitorNamespace == "hellovisitor",
+    "visitorNamespace of hello is hellovisitor");
 
   ok(omniTest.instance.account == "hello",
     "visitor account is hello");

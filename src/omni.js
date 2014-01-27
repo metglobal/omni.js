@@ -1,7 +1,7 @@
 function Omniture(instance) {
   this.instance = s_gi(instance);
   this.util = this.instance.util; 
-  var visitorNS = instance + "Visitor";
+  var visitorNS = instance + "visitor";
 
   this.setOption("account", instance);
   this.setOption("visitorNamespace", visitorNS);
