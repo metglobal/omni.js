@@ -1,4 +1,4 @@
-var AppMeasurement, Visitor;
+var AppMeasurement;
 AppMeasurement = {
   getInstance: function (instance) {
     return {
@@ -13,9 +13,7 @@ AppMeasurement = {
     };
   }
 };
-
-Visitor = function () {}
-Visitor.getInstance = function (instance) { return instance; }
+function s_gi(x) { return AppMeasurement.getInstance(x); }
 
 test("Test Construction", function() {
   
@@ -73,16 +71,6 @@ test("Test setSeqParam", function () {
 
 });
 
-test("Set visitor option", function () {
-  
-  var omniTest = omni("hello");
-  omniTest.setVisitorOption("hello", "world");
-
-  ok(omniTest.visitor.hello == "world",
-    "Setting visitor option hello sets value to world");
-
-});
-
 test("Set EVar", function () {
   
   var omniTest = omni("hello");
@@ -100,14 +88,14 @@ test("Set EVar", function () {
 test("Set Hier", function () {
   
   var omniTest = omni("hello");
-  omniTest.setHier(1, "world");
-  omniTest.setHier(5, "hello");
+  omniTest.setHier(1, ["world"]);
+  omniTest.setHier(5, ["hello", "world"]);
 
   ok(omniTest.instance.hier1 == "world",
     "hier1 is world");
 
-  ok(omniTest.instance.hier5 == "hello",
-    "hier5 is hello");
+  ok(omniTest.instance.hier5 == "hello|world",
+    "hier5 is hello|world");
 
 });
 
