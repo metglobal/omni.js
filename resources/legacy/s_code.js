@@ -1,16 +1,3 @@
-/* SiteCatalyst code version: H.26.2.
-Copyright 1996-2013 Adobe, Inc. All Rights Reserved
-More info available at http://www.omniture.com */
-
-var s_account="[INSERT-REPORT-SUITE-HERE]"
-var s=s_gi(s_account)
-/************************** CONFIG SECTION **************************/
-/* You may add or alter any code config here. */
-s.debugTracking=true
-s.trackingServer="[INSERT-TRACKING-SERVER-HERE]"
-s.visitorNamespace="[INSERT-VISITOR-NAMESPACE-HERE]"
-
-/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
 var s_code='',s_objectID;function s_gi(un,pg,ss){var c="s.version='H.26.2';s.an=s_an;s.logDebug=function(m){var s=this,tcf=new Function('var e;try{console.log(\"'+s.rep(s.rep(s.rep(m,\"\\\\\",\"\\\\"
 +"\\\\\"),\"\\n\",\"\\\\n\"),\"\\\"\",\"\\\\\\\"\")+'\");}catch(e){}');tcf()};s.cls=function(x,c){var i,y='';if(!c)c=this.an;for(i=0;i<x.length;i++){n=x.substring(i,i+1);if(c.indexOf(n)>=0)y+=n}retur"
 +"n y};s.fl=function(x,l){return x?(''+x).substring(0,l):x};s.co=function(o){return o};s.num=function(x){x=''+x;for(var p=0;p<x.length;p++)if(('0123456789').indexOf(x.substring(p,p+1))<0)return 0;ret"
