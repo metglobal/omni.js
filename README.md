@@ -22,7 +22,7 @@ omni("namespace")
 
   // Set Variables
   .set("pageName", "My Main Site")
-  
+
   // Define Routes
   .route(/products.html$/, function () {
     this.set("pageName", "Products Page")
@@ -30,7 +30,7 @@ omni("namespace")
   })
 
   .route(/purchase\/([0-9]+)/, function (purchaseId) {
-    
+
     this.set("purchaseID", purchaseId);
 
     // Use Preset Events for eCommerce
@@ -47,7 +47,7 @@ omni("namespace")
       price: 69.95
     });
   })
-  
+
   // Track custom events from DOM
   .track("button.purchase", "click", /*evar:*/15, "Purchase", "Purchase Button Clicked");
   .run();
@@ -55,7 +55,7 @@ omni("namespace")
 
 ## API
 
-### `omni(namespace)`
+### `omni(namespace, options)`
 
 Omni is the main function that returns the instance of the Omniture tracker object.
 
@@ -65,6 +65,8 @@ var s = omni("namespace");
 It sets `s_account` variable of Omniture.
 
 It also creates `Visitor` object with additional `"Visitor"` suffix. Then your Visitor namespace will be `"namespaceVisitor"`
+
+You can pass ``options`` object with two useful properties which allow you to disable autotrack and namespacing visitor. Just flag both of them as ``{ autotrack: false, namespace: false }``, by default they are enabled.
 
 ### `setOption(key, value)` or `set`
 
@@ -112,11 +114,11 @@ It registers a route to router stack to match and run by `run` method.
 
 ```javascript
 s.route("index.html", function () {
-  this.set("pageName", "Index Page");    
+  this.set("pageName", "Index Page");
 });
 
 s.route("about.html", function () {
-  this.set("pageName", "About Page");    
+  this.set("pageName", "About Page");
 });
 
 s.run(); //=> This is required to find routes.
@@ -137,7 +139,7 @@ Built in Presets:
 
 ```javascript
 s.preset("purchase", [
-  {category: "Running", product: "Shoe", "price": 10.99}    
+  {category: "Running", product: "Shoe", "price": 10.99}
 ]);
 ```
 

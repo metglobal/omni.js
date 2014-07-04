@@ -1,9 +1,11 @@
-function Omniture(instance) {
-  this.instance = s_gi(instance);
-  this.util = this.instance.util; 
-  var visitorNS = instance + "visitor";
+function Omniture(instance, options) {
+  options = options || { autotrack: true, namespace: true };
 
+  this.instance = s_gi(instance);
+  this.util = this.instance.util;
   this.setOption("account", instance);
+
+  var visitorNS = options.namespace ? instance + "visitor" : instance;
   this.setOption("visitorNamespace", visitorNS);
 
   this.setOption("charSet", "UTF-8");
@@ -11,7 +13,10 @@ function Omniture(instance) {
   this.setOption("linkTrackEvents", "None");
 
   this.routes = [];
-  this.autotrack();
+
+  if (options.autotrack) {
+    this.autotrack();
+  }
 }
 Omniture.prototype.setOption = function (key, value) {
   this.instance[key] = value;
@@ -62,7 +67,7 @@ Omniture.prototype.run = function (_path) {
       case "string":
         if (router.route == path) {
           router.callback.call(this, router.route);
-        } 
+        }
         break;
       case "object":
         if (router.route instanceof RegExp) {
@@ -131,13 +136,15 @@ Omniture.prototype.errorPage = function (code) {
         self.set("pageType", "errorPage");
         break;
     }
-  }
+  };
 };
 
 Omniture.prototype.serialize = function (mainEvent, items, map) {
   var list = [];
   var events = [mainEvent];
-  var map = (map || "").split(",");
+
+  map = (map || "").split(",");
+
   for (var i = 0; i < items.length; i++) {
     var item = items[i];
     var itemData = [];
