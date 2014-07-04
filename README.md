@@ -59,14 +59,14 @@ omni("namespace")
 
 Omni is the main function that returns the instance of the Omniture tracker object.
 
-You can pass ``options`` object with two useful properties which allow you to disable autotrack and namespacing visitor. Just flag both of them as ``{ autotrack: false, namespace: false }``, by default they are enabled.
-
 ```javascript
 var s = omni("namespace");
 ```
 It sets `s_account` variable of Omniture.
 
 It also creates `Visitor` object with additional `"Visitor"` suffix. Then your Visitor namespace will be `"namespaceVisitor"`
+
+You can pass ``options`` object with two useful properties which allow you to disable autotrack and namespacing visitor. Just flag both of them as ``{ autotrack: false, namespace: false }``, by default they are enabled.
 
 ### `setOption(key, value)` or `set`
 
